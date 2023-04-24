@@ -16,8 +16,6 @@ import throttle from 'lodash.throttle';
 
 const player = new Player('vimeo-player');
 
-console.log(player);
-
 player.on(
   'timeupdate',
   throttle(function (data) {
