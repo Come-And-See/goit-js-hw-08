@@ -29,11 +29,9 @@ refs.submit.addEventListener('click', onClearForm);
 const formDataNew = JSON.parse(localStorage.getItem('feedback-form-state'));
 
 if (Object.keys(formDataNew).length !== 0) {
-  refs.email.value = formDataNew.email;
-  refs.message.value = formDataNew.message;
-} else {
-  return;
-}
+  refs.email.value = formDataNew.email || '';
+  refs.message.value = formDataNew.message || '';
+};
 
 function onClearForm(e) {
   e.preventDefault();
@@ -41,4 +39,4 @@ function onClearForm(e) {
   refs.message.value = '';
   localStorage.removeItem('feedback-form-state');
   console.log(formDataNew);
-}
+};
