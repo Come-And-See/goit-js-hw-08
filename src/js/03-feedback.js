@@ -18,13 +18,9 @@ const formData = {};
 refs.form.addEventListener('input', throttle(onFormLocalStorage, 500));
 refs.submit.addEventListener('click', onClearForm);
 
-const formDataNew =
-  JSON.parse(localStorage.getItem('feedback-form-state')) || 0;
-
-if (Object.keys(formDataNew).length !== 0) {
-  refs.form.elements.email.value = formDataNew.email || '';
-  refs.form.elements.message.value = formDataNew.message || '';
-}
+const formDataNew = JSON.parse(
+  localStorage.getItem('feedback-form-state') || '{}'
+);
 
 function onClearForm(e) {
   e.preventDefault();
@@ -37,4 +33,9 @@ function onClearForm(e) {
 function onFormLocalStorage(e) {
   formData[e.target.name] = e.target.value;
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+}
+
+if (Object.keys(formDataNew).length !== 0) {
+  refs.form.elements.email.value = formDataNew.email || '';
+  refs.form.elements.message.value = formDataNew.message || '';
 }
