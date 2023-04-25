@@ -22,12 +22,17 @@ const formDataNew = JSON.parse(
   localStorage.getItem('feedback-form-state') || '{}'
 );
 
+if (Object.keys(formDataNew).length !== 0) {
+  refs.form.elements.email.value = formDataNew.email || '';
+  refs.form.elements.message.value = formDataNew.message || '';
+}
+
 function onClearForm(e) {
   e.preventDefault();
+  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
   refs.form.elements.email.value = '';
   refs.form.elements.message.value = '';
   localStorage.removeItem('feedback-form-state');
-  console.log(formDataNew);
 }
 
 function onFormLocalStorage(e) {
@@ -35,7 +40,3 @@ function onFormLocalStorage(e) {
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 }
 
-if (Object.keys(formDataNew).length !== 0) {
-  refs.form.elements.email.value = formDataNew.email || '';
-  refs.form.elements.message.value = formDataNew.message || '';
-}
